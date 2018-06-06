@@ -1,15 +1,31 @@
+/*
+ * 2018/6/6 オリハラ
+ * fan_motor
+ * モーターを回転させるだけのシステム
+ */
+ 
+// モーター用ピン
+const int m_signal1P = 2;
+const int m_signal2P = 3;
+const int m_speedP = 4;
+// そのた
+const int in_m_controlP = 5;
+
 void setup(){
-  pinMode(1,OUTPUT); //信号用ピン 6番ピン
-  pinMode(2,OUTPUT); //信号用ピン 5番ピン
+  pinMode(m_signal1P,OUTPUT);
+  pinMode(m_signal2P,OUTPUT);
+  pinMode(in_m_controlP,INPUT);
 }
 
 void loop(){
-  int val = 200;
+  int val = 180;
 
-  // 5番ピンをHIGH, 6番ピンをLOW
-  digitalWrite(1,LOW);
-  digitalWrite(2,HIGH);
+  digitalWrite(m_signal1P,HIGH);
+  digitalWrite(m_signal2P,LOW);
 
-  //valが大きいほど出力値も大きくなる
-  analogWrite( 3 , val ); //出力値:1~255
+  if(digitalRead(in_m_controlP) == HIGH){
+    analogWrite(m_speedP, val); //出力値:1~255
+  }else{
+    analogWrite(m_speedP, 0); //出力値:1~255
+  }
 }
