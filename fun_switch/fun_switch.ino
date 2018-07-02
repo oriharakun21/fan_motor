@@ -10,6 +10,7 @@ void setup() {
   Serial.begin(9600);
   btport.begin(38400);
   pinMode(in_m_controlP,INPUT);
+  state=0; // 初期値
 }
 
 void loop(){
@@ -28,13 +29,25 @@ delay(200);
 void swtchChange(){
   s_val = digitalRead(in_m_controlP);
   if(s_val == HIGH && s_old_val == LOW){
-    state = 1 - state;
+    state++;
+    if(state==4){
+      state=0;
+    }
     delay(30);
   }
-  if(state==1){
+  switch(state){
+    case 1:
     btport.write('1');
-  } else {
+    break;
+    case 2:
+    btport.write('2');
+    break;
+    case 3:
+    btport.write('3');
+    break;
+    default:
     btport.write('0');
+    break;
   }
   
   s_old_val = s_val;

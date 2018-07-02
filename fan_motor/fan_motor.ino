@@ -1,13 +1,12 @@
 #include <SoftwareSerial.h>
 // rx, tx
-SoftwareSerial btport(5, 6);
+SoftwareSerial btport(4, 5);
 
 // モーター用ピン
 const int m_signal1P = 2;
 const int m_signal2P = 3;
-const int m_speedP = 4;
+const int m_speedP = 6;
 // モーター関連
-int m_val;  //出力値:1~255
 int s_tmp;
 
 
@@ -17,7 +16,6 @@ void setup(){
   
   pinMode(m_signal1P,OUTPUT);
   pinMode(m_signal2P,OUTPUT);
-  m_val = 140;
   s_tmp=0;
 }
 
@@ -35,7 +33,11 @@ void loop(){
 
 void switchSerial(){
   if(s_tmp == 49){
-      analogWrite(m_speedP, m_val);
+      analogWrite(m_speedP, 75);
+    } else if(s_tmp == 50){
+      analogWrite(m_speedP, 160);
+    } else if(s_tmp == 51){
+      analogWrite(m_speedP, 255);
     } else {
       analogWrite(m_speedP, 0);
     }
