@@ -17,12 +17,12 @@ void setup(){
   pinMode(m_signal1P,OUTPUT);
   pinMode(m_signal2P,OUTPUT);
   s_tmp=0;
+
+  digitalWrite(m_signal1P,HIGH);
+  digitalWrite(m_signal2P,LOW);
 }
 
 void loop(){
-  digitalWrite(m_signal1P,HIGH);
-  digitalWrite(m_signal2P,LOW);
-
   while(btport.available()){
     s_tmp=int(btport.read());
   }
