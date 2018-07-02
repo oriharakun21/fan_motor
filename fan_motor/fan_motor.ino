@@ -1,5 +1,6 @@
 #include <SoftwareSerial.h>
-SoftwareSerial btport(8, 9);
+// rx, tx
+SoftwareSerial btport(5, 6);
 
 // モーター用ピン
 const int m_signal1P = 2;
@@ -16,7 +17,7 @@ void setup(){
   
   pinMode(m_signal1P,OUTPUT);
   pinMode(m_signal2P,OUTPUT);
-  m_val = 255;
+  m_val = 140;
   s_tmp=0;
 }
 
